@@ -26,7 +26,7 @@ def main():
     dt = 0.01
     sim_time = 30.0 # seconds
     steps = int(sim_time / dt)
-    update_interval = 10 # Control update interval (steps)
+    update_interval = 5 # Control update interval (steps) - Faster update
 
     msd = MassSpringDamper(dt=dt)
 
@@ -88,7 +88,7 @@ def main():
             # history_z has length L+1, history_u has length L
             if len(history_u) >= 10:
                  # Use recent history for adaptation
-                 loss, l_m, l_p = mpc.optimize_step(history_z, history_u, z, steps=5)
+                 loss, l_m, l_p = mpc.optimize_step(history_z, history_u, z, steps=15)
 
             current_u = mpc.get_control()
 

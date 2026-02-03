@@ -30,7 +30,7 @@ class DifferentialKoopmanMPC(nn.Module):
 
         # Weights
         self.w_m = 1.0 # Model weight
-        self.w_p = 0.01 # MPC weight (tune this)
+        self.w_p = 1.0 # MPC weight (tuned for stability)
 
         # Optimizer
         self.optimizer = optim.Adam(self.parameters(), lr=0.005)
@@ -86,10 +86,10 @@ class DifferentialKoopmanMPC(nn.Module):
         # u_pred: (H, ctrl_dim)
         # ref_x: target state (0,0)
 
-        # Q = diag([10, 1]) - Penalize position more
+        # Q = diag([10, 5]) - Penalize position and velocity
         # R = diag([0.1])
 
-        Q = torch.tensor([10.0, 1.0], device=x_pred.device)
+        Q = torch.tensor([10.0, 5.0], device=x_pred.device)
         R = torch.tensor([0.1], device=x_pred.device)
 
         # Calculate cost
