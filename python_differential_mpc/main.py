@@ -24,7 +24,7 @@ def main():
 
     # 3. Setup Simulation
     dt = 0.01
-    sim_time = 30.0 # seconds
+    sim_time = 60.0 # seconds
     steps = int(sim_time / dt)
     update_interval = 5 # Control update interval (steps) - Faster update
 
